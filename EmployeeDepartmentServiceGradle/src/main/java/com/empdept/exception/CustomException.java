@@ -1,4 +1,4 @@
-package com.employee.exception;
+package com.empdept.exception;
 
 import java.util.ArrayList;
 import java.util.List;

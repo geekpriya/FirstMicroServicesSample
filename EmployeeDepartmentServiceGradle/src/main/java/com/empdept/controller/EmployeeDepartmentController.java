@@ -1,4 +1,4 @@
-package com.employee.controller;
+package com.empdept.controller;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,23 +16,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.employee.model.Department;
-import com.employee.model.DepartmentEmployee;
-import com.employee.model.Employee;
-import com.employee.exception.*;
+import com.empdept.exception.*;
+import com.empdept.model.Department;
+import com.empdept.model.DepartmentEmployee;
+import com.empdept.model.Employee;
 
 @RestController
-@RequestMapping("/department")
-public class DepartmentController {
+@RequestMapping("/empdept")
+public class EmployeeDepartmentController {
 
 	final String EMP_URI = "http://localhost:8103/employee"; ///employees
 	final String DEPT_URI = "http://localhost:8104/department";
 	@Autowired
 	RestTemplate restTemplate;
 
-	@RequestMapping(value = "/employees/{deptId}", method = RequestMethod.GET)
-	public DepartmentEmployee getEmployeesByDeptId(@PathVariable String deptId) throws CustomException {
-		Employee[] resp = restTemplate.getForObject("http://localhost:8103/employee/employees/"+deptId, Employee[].class);
+	@RequestMapping(value = "/empbydeptid/{deptId}", method = RequestMethod.GET)
+	public DepartmentEmployee getEmployeesByDeptId(@PathVariable String deptId) throws Exception {
+		Employee[] resp = restTemplate.getForObject("http://localhost:8103/employee/empbydeptid/"+deptId, Employee[].class);
 		DepartmentEmployee departmentEmployee = new DepartmentEmployee();
 
 		departmentEmployee.setDeptId(deptId);
@@ -40,7 +40,7 @@ public class DepartmentController {
 		ResponseEntity<Department> departmentEntity = restTemplate.getForEntity(DEPT_URI + "/departments/" + deptId,
 				Department.class);
 		departmentEmployee.setDeptName(departmentEntity.getBody().getDeptName());
-		List<Employee> empList = Arrays.asList(resp).stream().filter(e -> e.getDepId().equals(deptId))
+		List<Employee> empList = Arrays.asList(resp).stream().filter(e -> deptId.equals(e.getDepId()))
 				.collect(Collectors.toList());
 
 		departmentEmployee.setEmpList(empList);
@@ -50,7 +50,7 @@ public class DepartmentController {
 	
 	@RequestMapping(value = "/employees/{deptId}/{employee}", method = RequestMethod.POST)
 	public DepartmentEmployee addEmployeeInDept(@PathVariable String deptId, @RequestBody Employee employee)
-			throws CustomException {
+			throws Exception {
 		Employee resp = restTemplate.postForObject("http://localhost:8103/employee/create/", employee, Employee.class);
 
 		Department departmentEntity = restTemplate.getForObject(DEPT_URI + "/departments/" + deptId, Department.class);
@@ -69,10 +69,17 @@ public class DepartmentController {
 		return departmentEmployee;
 	}
 
-	@RequestMapping(value = "/employees/{empId}", method = RequestMethod.GET)
-	public Employee getEmployeeById(@PathVariable String empId) throws CustomException {
-		ResponseEntity<Employee> resp = restTemplate.getForEntity(EMP_URI, Employee.class);
+	@RequestMapping(value = "/empbyempid/{empId}", method = RequestMethod.GET)
+	public Employee getEmpByEmpId(@PathVariable String empId) throws Exception {
+		ResponseEntity<Employee> resp = restTemplate.getForEntity("http://localhost:8103/employee/empbyempid/"+empId, Employee.class);
 		// Get Dept Data
 		return resp.getBody();
+	}
+	
+	@RequestMapping(value = "/department/create", method = RequestMethod.POST)
+	public Department addDepartment(@RequestBody Department department) {
+		Department dept = restTemplate.postForObject("http://localhost:8104/department/create/", department,
+				Department.class);
+		return dept;
 	}
 }

@@ -1,4 +1,4 @@
-package com.employee.start;
+package com.empdept.start;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 
 @SpringBootApplication
-@ComponentScan("com.employee")
-@EnableMongoRepositories(basePackages = "com.employee.dal")
+@ComponentScan("com.empdept")
+@EnableMongoRepositories(basePackages = "com.empdept.dal")
 public class EmployeeServiceApplication {
 
 	public static void main(String[] args) {

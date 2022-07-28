@@ -1,8 +1,8 @@
-package com.employee.dal;
+package com.empdept.dal;
 
 import java.util.List;
 
-import com.employee.model.Employee;
+import com.empdept.model.Employee;
 
 public interface EmployeeDAL {
 

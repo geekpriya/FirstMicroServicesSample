@@ -1,4 +1,4 @@
-package com.employee.model;
+package com.empdept.model;
 
 import java.util.ArrayList;
 import java.util.Collection;

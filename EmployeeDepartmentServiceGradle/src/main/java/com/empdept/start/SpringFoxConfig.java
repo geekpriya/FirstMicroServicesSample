@@ -1,4 +1,4 @@
-package com.employee.start;
+package com.empdept.start;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

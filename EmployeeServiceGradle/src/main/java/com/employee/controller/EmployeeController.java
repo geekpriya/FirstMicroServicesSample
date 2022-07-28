@@ -35,10 +35,16 @@ public class EmployeeController {
 		return employeeDAL.getAllEmployees();
 	}
 
-	@RequestMapping(value = "/employees/{empId}", method = RequestMethod.GET)
-	public Employee getEmployeeById(@PathVariable String empId) {
+	@RequestMapping(value = "/empbyempid/{empId}", method = RequestMethod.GET)
+	public Employee getEmpByEmpId(@PathVariable String empId) {
 
-		return employeeDAL.getEmployeeById(empId);
+		return employeeDAL.getEmpByEmpId(empId);
+	}
+	
+	@RequestMapping(value = "/empbydeptid/{deptId}", method = RequestMethod.GET)
+	public List<Employee> getEmpByDeptId(@PathVariable String deptId) {
+
+		return employeeDAL.getEmpByDeptId(deptId);
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)

@@ -22,7 +22,7 @@ public class EmployeeDALImpl implements EmployeeDAL {
 	}
 
 	@Override
-	public Employee getEmployeeById(String empId) {
+	public Employee getEmpByEmpId(String empId) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("empId").is(empId));
 		return mongoTemplate.findOne(query, Employee.class);
@@ -30,7 +30,7 @@ public class EmployeeDALImpl implements EmployeeDAL {
 	}
 	
 	@Override
-	public List<Employee> getEmployeesByDeptId(String depId) {
+	public List<Employee> getEmpByDeptId(String depId) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("depId").is(depId));
 		return mongoTemplate.find(query, Employee.class);

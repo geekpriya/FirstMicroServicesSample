@@ -6,12 +6,17 @@ import com.employee.model.Employee;
 
 public interface EmployeeDAL {
 
-	Employee getEmployeeById(String empId);
+
 
 	Employee addEmployee(Employee employee);
 
 	List<Employee> getAllEmployees();
 
-	List<Employee> getEmployeesByDeptId(String depId);
+	Employee getEmpByEmpId(String empId);
+
+	
+
+	List<Employee> getEmpByDeptId(String deptId);
+
 
 }

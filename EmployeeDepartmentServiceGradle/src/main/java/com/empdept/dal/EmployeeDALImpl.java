@@ -1,4 +1,4 @@
-package com.employee.dal;
+package com.empdept.dal;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.employee.model.Employee;
+import com.empdept.model.Employee;
 
 @Repository
 public class EmployeeDALImpl implements EmployeeDAL {

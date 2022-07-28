@@ -13,17 +13,20 @@ public class Department {
 	@Id
 	private String deptId;
 	private String deptName;
-	private List<String> empIdList;
+	private List<String> empId;
 
 	public Department() {
 	}
 
-	public List<String> getEmpIdList() {
-		return empIdList;
+	public List<String> getEmpId() {
+		if (empId == null) {
+			empId = new ArrayList();
+		}
+		return empId;
 	}
 
-	public void setEmpIdList(List<String> empIdList) {
-		this.empIdList = empIdList;
+	public void setEmpId(List<String> empId) {
+		this.empId = empId;
 	}
 
 	public String getDeptId() {
